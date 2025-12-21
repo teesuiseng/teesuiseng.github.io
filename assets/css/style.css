@@ -30,3 +30,15 @@ img.placeholder{width:220px;max-width:100%;height:auto;border:1px dashed var(--b
   margin: 1.5rem auto;
   border-radius: 8px;
 }
+.social-links {
+  margin-top: 10px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  font-size: 0.95rem;
+  color: var(--link);
+  font-weight: 500;
+}
