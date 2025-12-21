@@ -21,3 +21,11 @@ p{margin:10px 0}
 footer{border-top:1px solid var(--border);margin-top:34px;padding:18px 0;color:var(--muted);font-size:.9rem}
 hr{border:0;border-top:1px solid var(--border);margin:18px 0}
 img.placeholder{width:220px;max-width:100%;height:auto;border:1px dashed var(--border);border-radius:12px;padding:18px;color:var(--muted)}
+.hero-image {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  display: block;
+  margin: 1.5rem auto;
+  border-radius: 8px;
+}
