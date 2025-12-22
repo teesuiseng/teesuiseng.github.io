@@ -42,3 +42,42 @@ img.placeholder{width:220px;max-width:100%;height:auto;border:1px dashed var(--b
   color: var(--link);
   font-weight: 500;
 }
+.social-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 12px;
+  border-radius: 12px;
+
+  text-decoration: none;
+  color: inherit;
+
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(0,0,0,0.02);
+
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.social-links a:hover {
+  transform: translateY(-1px);
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.14);
+}
+
+.social-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.social-text {
+  font-size: 0.95rem;
+}
