@@ -14,7 +14,7 @@ h1{font-size:2rem;margin:0 0 10px}
 h2{font-size:1.25rem;margin:28px 0 10px}
 p{margin:10px 0}
 .tags{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 2px}
-.tags-home {justify-content: space-between;}
+.tags-home{justify-content:space-between}
 .tag{border:1px solid var(--border);border-radius:999px;padding:4px 10px;font-size:.9rem;color:var(--muted)}
 .card{border:1px solid var(--border);border-radius:12px;padding:14px;margin:10px 0}
 .small{color:var(--muted);font-size:.95rem}
@@ -22,62 +22,28 @@ p{margin:10px 0}
 footer{border-top:1px solid var(--border);margin-top:34px;padding:18px 0;color:var(--muted);font-size:.9rem}
 hr{border:0;border-top:1px solid var(--border);margin:18px 0}
 img.placeholder{width:220px;max-width:100%;height:auto;border:1px dashed var(--border);border-radius:12px;padding:18px;color:var(--muted)}
-.hero-image {
-  width: 100%;
-  max-width: 900px;
-  height: auto;
-  display: block;
-  margin: 1.5rem auto;
-  border-radius: 8px;
+
+.hero-image{width:100%;max-width:900px;height:auto;display:block;margin:1.5rem auto;border-radius:8px}
+
+/* Social icons (consistent with cards + site palette) */
+.social-links{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 0}
+.social-links a{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--link);
+  font-weight:500;
+  text-decoration:none;
+  transition:transform .15s ease, background .15s ease;
 }
-.social-links {
-  margin-top: 10px;
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
+.social-links a:hover{
+  transform:translateY(-1px);
+  background:rgba(0,0,0,0.02);
+  text-decoration:none;
 }
-
-.social-links a {
-  font-size: 0.95rem;
-  color: var(--link);
-  font-weight: 500;
-}
-.social-links {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 8px;
-}
-
-.social-links a {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 10px 12px;
-  border-radius: 12px;
-
-  text-decoration: none;
-  color: inherit;
-
-  border: 1px solid rgba(0,0,0,0.08);
-  background: rgba(0,0,0,0.02);
-
-  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-}
-
-.social-links a:hover {
-  transform: translateY(-1px);
-  background: rgba(0,0,0,0.04);
-  border-color: rgba(0,0,0,0.14);
-}
-
-.social-icon {
-  width: 18px;
-  height: 18px;
-  display: block;
-}
-
-.social-text {
-  font-size: 0.95rem;
-}
+.social-icon{width:18px;height:18px;display:block}
+.social-text{font-size:.95rem}
