@@ -1,0 +1,29 @@
+name: Update publications
+
+on:
+  schedule:
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  scrape-publications:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Scrape Google Scholar publications
+        run: python scripts/update_publications.py
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: Update publications from Google Scholar
+          title: Update publications from Google Scholar
+          body: |
+            Monthly automated refresh of recent publications from the Tee Lab Google Scholar profile.
+          branch: automated/update-publications
