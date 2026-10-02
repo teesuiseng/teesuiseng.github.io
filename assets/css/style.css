@@ -47,3 +47,30 @@ img.placeholder{width:220px;max-width:100%;height:auto;border:1px dashed var(--b
 }
 .social-icon{width:18px;height:18px;display:block}
 .social-text{font-size:.95rem}
+
+/* Publications */
+.publications-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;padding:8px 0 28px;border-bottom:1px solid var(--border)}
+.publications-intro h1{font-size:clamp(2.25rem,6vw,4rem);line-height:1.05;letter-spacing:-.04em;margin:2px 0 12px}
+.publications-intro p:not(.eyebrow){max-width:660px;margin:0;color:var(--muted);font-size:1.05rem}
+.eyebrow{margin:0;color:#557b19;font-size:.78rem;font-weight:750;letter-spacing:.13em;text-transform:uppercase}
+.orcid-link{display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;border:1px solid #a6ce39;border-radius:999px;padding:8px 12px;color:var(--fg);font-size:.86rem;font-weight:600;white-space:nowrap}
+.orcid-link:hover{background:#f6faeb;text-decoration:none}
+.orcid-mark{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#a6ce39;color:#fff;font-size:.72rem;font-weight:800}
+.publication-years{margin-top:8px}
+.publication-year{display:grid;grid-template-columns:130px minmax(0,1fr);gap:28px;padding:36px 0;border-bottom:1px solid var(--border)}
+.year-heading{position:sticky;top:76px;align-self:start}
+.year-heading h2{font-size:1.65rem;line-height:1;margin:0 0 7px;letter-spacing:-.02em}
+.year-heading span{color:var(--muted);font-size:.78rem}
+.publication-list{display:grid;gap:12px}
+.publication-card{position:relative;padding:20px 22px;border:1px solid var(--border);border-radius:14px;background:#fff;box-shadow:0 3px 16px rgba(17,17,17,.035)}
+.publication-card h3{margin:0;font-size:1.05rem;line-height:1.42;font-weight:680;letter-spacing:-.01em}
+.publication-card h3 a{color:var(--fg)}
+.publication-card h3 a:hover{color:var(--link)}
+.publication-authors,.publication-meta{margin:8px 0 0;color:var(--muted);font-size:.9rem}
+.publication-meta{color:#557b19;font-weight:600}
+@media(max-width:700px){
+  .publications-intro{align-items:flex-start;flex-direction:column}
+  .publication-year{grid-template-columns:1fr;gap:16px;padding:28px 0}
+  .year-heading{position:static;display:flex;align-items:baseline;gap:10px}
+  .publication-card{padding:17px}
+}

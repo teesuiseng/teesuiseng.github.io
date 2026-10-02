@@ -17,13 +17,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-      - name: Scrape Google Scholar publications
+      - name: Fetch publications from ORCID
         run: python scripts/update_publications.py
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: Update publications from Google Scholar
-          title: Update publications from Google Scholar
+          commit-message: Update publications from ORCID
+          title: Update publications from ORCID
           body: |
-            Monthly automated refresh of recent publications from the Tee Lab Google Scholar profile.
+            Monthly automated refresh of recent publications from Sui-Seng Tee's ORCID record.
           branch: automated/update-publications
