@@ -11,9 +11,11 @@ from __future__ import annotations
 import html
 import re
 import sys
+import time
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
@@ -22,6 +24,12 @@ START_YEAR = 2024
 MAX_PAGES = 3
 PAGE_SIZE = 100
 PUBLICATIONS_PAGE = Path("publications/index.html")
+FETCH_ATTEMPTS = 3
+
+
+class ScholarUnavailableError(RuntimeError):
+    """Raised when Google Scholar cannot be reached after retrying."""
+
 
 @dataclass(frozen=True)
 class Publication:
@@ -32,9 +40,35 @@ class Publication:
 
 
 def fetch(url: str) -> str:
-    request = Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    with urlopen(request, timeout=30) as response:
-        return response.read().decode("utf-8", "replace")
+    request = Request(
+        url,
+        headers={
+            "Accept": "text/html,application/xhtml+xml",
+            "Accept-Language": "en-US,en;q=0.9",
+            "User-Agent": (
+                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/129.0 Safari/537.36"
+            ),
+        },
+    )
+    for attempt in range(FETCH_ATTEMPTS):
+        try:
+            with urlopen(request, timeout=30) as response:
+                return response.read().decode("utf-8", "replace")
+        except HTTPError as error:
+            if error.code not in {403, 429, 500, 502, 503, 504}:
+                raise
+            last_error: OSError = error
+        except (URLError, TimeoutError) as error:
+            last_error = error
+
+        if attempt + 1 < FETCH_ATTEMPTS:
+            time.sleep(2**attempt)
+
+    raise ScholarUnavailableError(
+        f"Google Scholar could not be reached after {FETCH_ATTEMPTS} attempts: "
+        f"{last_error}"
+    ) from last_error
 
 
 def clean(value: str) -> str:
@@ -130,7 +164,14 @@ def replace_latest_section(page: str, replacement: str) -> str:
 def main() -> int:
     page_path = PUBLICATIONS_PAGE
     page = page_path.read_text()
-    publications = parse_publications(scholar_pages())
+    try:
+        publications = parse_publications(scholar_pages())
+    except ScholarUnavailableError as error:
+        # Scholar routinely rejects requests from shared GitHub Actions IPs. A
+        # temporary block should not fail the scheduled workflow or erase the
+        # last successful publication list; the next monthly run will retry.
+        print(f"::warning title=Google Scholar unavailable::{error}", file=sys.stderr)
+        return 0
     if not publications:
         raise RuntimeError("No recent publications found on Google Scholar")
     updated = replace_latest_section(page, render_publications(publications))
